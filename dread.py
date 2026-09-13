@@ -1,5 +1,6 @@
 import json
 import csv
+
 for i in ['generated_essays.json','original_essay.json']:
     with open(i,'r',encoding='utf-8') as f:
         data = json.load(f)
