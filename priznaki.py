@@ -21,6 +21,7 @@ def supersplit(text,label):
     unique_word_ratio = types_count / word_count
     avg_syllable_length = syllable_count / word_count
     readabillity = 206.835 - (1.3 * avg_sentence_length) - (60.1 * avg_syllable_length)
+
     return [text,label,word_count,char_count,sentence_count,avg_word_length,avg_sentence_length,unique_word_ratio,uppercase_ratio,syllable_ratio,punctuation_count,readabillity]
 def uppercase(text):
     count = 0
