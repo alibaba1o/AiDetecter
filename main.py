@@ -1,6 +1,8 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+import csv
+import os
 from datasets import load_dataset
 
 '''
@@ -9,8 +11,7 @@ text = dataset['train']
 text.to_csv("dataset.csv",index=False)
 '''
 
-import csv
-import os
+
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 clf = RandomForestClassifier(random_state=0)
 reader = csv.reader(open('update.csv','r', encoding='utf-8'))

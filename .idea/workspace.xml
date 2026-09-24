@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5962b57c-e80c-46c0-8b66-b560deabfc63" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/AiDetector.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dread.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/priznaki.py" afterDir="false" />
+    <list default="true" id="5962b57c-e80c-46c0-8b66-b560deabfc63" name="Changes" comment="Файл для вычисления признаков с файла dataset.csv&#10;&#10;Готовый результат update.csv">
+      <change afterPath="$PROJECT_DIR$/.~lock.aiVShuman.csv#" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aiVShuman.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/how --stat 8a5c15f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.~lock.analys.csv#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.~lock.update.csv#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/priznaki.py" beforeDir="false" afterPath="$PROJECT_DIR$/priznaki.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/update.csv" beforeDir="false" afterPath="$PROJECT_DIR$/update.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/update.ods" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +28,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;alibaba1o&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/alibaba1o/AiDetecter.git&quot;,
+    &quot;accountId&quot;: &quot;4a60419d-30d9-435f-b052-a32b463a4e65&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -35,18 +48,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.dread.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.priznaki.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.dread.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.priznaki.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kirya/PycharmProjects/AiDetector&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kirya\PycharmProjects\AiDetector" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -62,6 +81,55 @@
       <option name="presentableId" value="Default" />
       <updated>1785770672765</updated>
     </task>
+    <task id="LOCAL-00001" summary="Проверка работы репозитория">
+      <option name="closed" value="true" />
+      <created>1789328317870</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1789328317870</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Файл с подсчитанными признаками готовых текстов">
+      <option name="closed" value="true" />
+      <created>1789328960161</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1789328960161</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Реализация ИИ в самом простейшем её виде">
+      <option name="closed" value="true" />
+      <created>1789329032558</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1789329032558</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Файл для считывания БД с разделёнными текстами">
+      <option name="closed" value="true" />
+      <created>1789329077724</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1789329077724</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Файл для вычисления признаков с файла dataset.csv&#10;&#10;Готовый результат update.csv">
+      <option name="closed" value="true" />
+      <created>1789329142383</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1789329142383</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Проверка работы репозитория" />
+    <MESSAGE value="Файл с подсчитанными признаками готовых текстов" />
+    <MESSAGE value="Реализация ИИ в самом простейшем её виде" />
+    <MESSAGE value="Файл для считывания БД с разделёнными текстами" />
+    <MESSAGE value="Файл для вычисления признаков с файла dataset.csv&#10;&#10;Готовый результат update.csv" />
+    <option name="LAST_COMMIT_MESSAGE" value="Файл для вычисления признаков с файла dataset.csv&#10;&#10;Готовый результат update.csv" />
   </component>
 </project>

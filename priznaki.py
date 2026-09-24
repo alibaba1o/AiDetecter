@@ -1,6 +1,16 @@
 import csv
-from datasets import load_dataset
+
+class objStats:
+    def __init__(self):
+        self.allLength = []
+        self.allSyllables = []
+        self.allReadabillity = []
+        self.maxReadabillity = 0
+        self.minReadabillity = 0
+        self.posReadabillity = 0
+        self.negReadabillity = 0
 #Моя песнь был а красива!
+
 def supersplit(text,label):
     text = text.replace('—','-')
     texts = text.split(' ')
@@ -21,7 +31,7 @@ def supersplit(text,label):
     unique_word_ratio = types_count / word_count
     avg_syllable_length = syllable_count / word_count
     readabillity = 206.835 - (1.3 * avg_sentence_length) - (60.1 * avg_syllable_length)
-
+    #       0    1      2           3           4           5               6                   7                   8               9               10              11
     return [text,label,word_count,char_count,sentence_count,avg_word_length,avg_sentence_length,unique_word_ratio,uppercase_ratio,syllable_ratio,punctuation_count,readabillity]
 def uppercase(text):
     count = 0
@@ -48,9 +58,15 @@ def syllables(text):
 with open('dataset.csv','r',encoding='utf-8') as file:
     reader = csv.reader(file)
     header = next(reader)
+    countForHeader = 0
+    headerForNewFile = ['text','label','word_count','char_count','sentence_count','avg_word_length','avg_sentence_length','unique_word_ratio','uppercase_ratio','syllable_ratio','punctuation_count','readabillity']
+    #Создание файла update.csv с подсчётом статистики и т.п
     for row in reader:
         with open('update.csv','a',encoding='utf-8',newline='') as f:
             writer = csv.writer(f)
+            if countForHeader == 0:
+                writer.writerow(headerForNewFile)
+                countForHeader+=1
             text = row[0]
             label = row[1]
             if label.lower() != 'human':
@@ -58,3 +74,43 @@ with open('dataset.csv','r',encoding='utf-8') as file:
             else:
                 label = 1
             writer.writerow(supersplit(text,label))
+#обобщение файла update.csv
+with open('update.csv', 'r', encoding='utf-8') as f:
+    readerUpdate = csv.reader(f)
+    header = next(readerUpdate)
+    count = 0
+    human = objStats()
+    ai = objStats()
+    for row in readerUpdate:
+        if row[1]=='1':
+            human.allLength.append(float(row[4]))
+            human.allSyllables.append(float(row[9]))
+            human.allReadabillity.append(float(row[11]))
+            if float(row[11]) > 0:
+                human.posReadabillity += 1
+            else:
+                human.negReadabillity += 1
+        else:
+            ai.allLength.append(float(row[4]))
+            ai.allSyllables.append(float(row[9]))
+            ai.allReadabillity.append(float(row[11]))
+            if float(row[11]) > 0:
+                ai.posReadabillity += 1
+            else:
+                ai.negReadabillity += 1
+    human.maxReadabillity = max(human.allReadabillity)
+    human.minReadabillity = min(human.allReadabillity)
+    ai.maxReadabillity = max(ai.allReadabillity)
+    ai.minReadabillity = min(ai.allReadabillity)
+    with open('aiVShuman.csv','w') as anFile:
+        writer = csv.writer(anFile)
+        writer.writerow([' ','human','ai'])
+        writer.writerow(['avgLenght',(sum(human.allLength)/len(human.allLength)),(sum(ai.allLength)/len(ai.allLength))])
+        writer.writerow(
+            ['avgSyllables',(sum(human.allSyllables) / len(human.allSyllables)), (sum(ai.allSyllables) / len(ai.allSyllables))])
+        writer.writerow(
+            ['avgReadabillity',(sum(human.allReadabillity) / len(human.allReadabillity)), (sum(ai.allReadabillity) / len(ai.allReadabillity))])
+        writer.writerow(['posreadCount',human.posReadabillity,ai.posReadabillity])
+        writer.writerow(['negreadCount',human.negReadabillity,ai.negReadabillity])
+        writer.writerow(['minread',human.minReadabillity,ai.minReadabillity])
+        writer.writerow(['maxread',human.maxReadabillity,ai.maxReadabillity])
