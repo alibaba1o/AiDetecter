@@ -83,7 +83,7 @@ with open('update.csv', 'r', encoding='utf-8') as f:
     ai = objStats()
     for row in readerUpdate:
         if row[1]=='1':
-            human.allLength.append(float(row[4]))
+            human.allLength.append(float(row[6]))
             human.allSyllables.append(float(row[9]))
             human.allReadabillity.append(float(row[11]))
             if float(row[11]) > 0:
@@ -91,7 +91,7 @@ with open('update.csv', 'r', encoding='utf-8') as f:
             else:
                 human.negReadabillity += 1
         else:
-            ai.allLength.append(float(row[4]))
+            ai.allLength.append(float(row[6]))
             ai.allSyllables.append(float(row[9]))
             ai.allReadabillity.append(float(row[11]))
             if float(row[11]) > 0:
