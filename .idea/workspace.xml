@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5962b57c-e80c-46c0-8b66-b560deabfc63" name="Changes" comment="Файл для вычисления признаков с файла dataset.csv&#10;&#10;Готовый результат update.csv">
-      <change afterPath="$PROJECT_DIR$/.~lock.update.csv#" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/priznaki.py" beforeDir="false" afterPath="$PROJECT_DIR$/priznaki.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aiVShuman.csv" beforeDir="false" afterPath="$PROJECT_DIR$/aiVShuman.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
