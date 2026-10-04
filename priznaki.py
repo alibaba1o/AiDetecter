@@ -1,5 +1,4 @@
 import csv
-
 class objStats:
     def __init__(self):
         self.allLength = []
@@ -54,26 +53,31 @@ def syllables(text):
                 syllable_count += 1
     return syllable_count
 
+def WordProcessing(databaseName,processedDatabase):
+    with open(processedDatabase,'w',encoding='utf-8',newline='') as file:
+        writer = csv.writer(file)
+        headerForNewFile = ['text', 'label', 'word_count', 'char_count', 'sentence_count', 'avg_word_length',
+                            'avg_sentence_length', 'unique_word_ratio', 'uppercase_ratio', 'syllable_ratio',
+                            'punctuation_count', 'readabillity']
+        writer.writerow(headerForNewFile)
+    with open(databaseName,'r',encoding='utf-8') as file:
+        reader = csv.reader(file)
+        #Создание файла update.csv с подсчётом статистики и т.п
+        for row in reader:
+            with open(processedDatabase,'a',encoding='utf-8',newline='') as f:
+                writer = csv.writer(f)
+                text = row[0]
+                label = row[1]
+                if label.lower() != 'human':
+                    label = 0
+                else:
+                    label = 1
+                writer.writerow(supersplit(text,label))
 
-with open('dataset.csv','r',encoding='utf-8') as file:
-    reader = csv.reader(file)
-    header = next(reader)
-    countForHeader = 0
-    headerForNewFile = ['text','label','word_count','char_count','sentence_count','avg_word_length','avg_sentence_length','unique_word_ratio','uppercase_ratio','syllable_ratio','punctuation_count','readabillity']
-    #Создание файла update.csv с подсчётом статистики и т.п
-    for row in reader:
-        with open('update.csv','a',encoding='utf-8',newline='') as f:
-            writer = csv.writer(f)
-            if countForHeader == 0:
-                writer.writerow(headerForNewFile)
-                countForHeader+=1
-            text = row[0]
-            label = row[1]
-            if label.lower() != 'human':
-                label = 0
-            else:
-                label = 1
-            writer.writerow(supersplit(text,label))
+database=[['paraphrased_data.csv','paraphrased_update.csv'],['dataset.csv','update.csv']]
+for data in database:
+    WordProcessing(data[0],data[1])
+
 #обобщение файла update.csv
 with open('update.csv', 'r', encoding='utf-8') as f:
     readerUpdate = csv.reader(f)
