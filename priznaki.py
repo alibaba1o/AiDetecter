@@ -1,4 +1,10 @@
 import csv
+import zlib
+from transformers import AutoTokenizer, AutoModelForCausalLM
+import torch
+tokenizer = AutoTokenizer.from_pretrained("ai-forever/rugpt3small_based_on_gpt2")
+model = AutoModelForCausalLM.from_pretrained("ai-forever/rugpt3small_based_on_gpt2", device_map="auto")
+
 class objStats:
     def __init__(self):
         self.allLength = []
@@ -8,10 +14,16 @@ class objStats:
         self.minReadabillity = 0
         self.posReadabillity = 0
         self.negReadabillity = 0
+        self.Perplexity = []
+        self.CompressionRatio = []
 #Моя песнь был а красива!
 
 def supersplit(text,label):
     text = text.replace('—','-')
+    byteSize = len(text.encode('utf-8'))
+    byteCompressedText = zlib.compress(text.encode('utf-8'))
+    byteCompressedText = len(byteCompressedText)
+
     texts = text.split(' ')
     syllable_count = syllables(texts)
     uppercase_ratio = uppercase(texts)
@@ -29,9 +41,16 @@ def supersplit(text,label):
     avg_sentence_length = word_count / sentence_count
     unique_word_ratio = types_count / word_count
     avg_syllable_length = syllable_count / word_count
+    compressionRatio = byteSize/byteCompressedText
     readabillity = 206.835 - (1.3 * avg_sentence_length) - (60.1 * avg_syllable_length)
-    #       0    1      2           3           4           5               6                   7                   8               9               10              11
-    return [text,label,word_count,char_count,sentence_count,avg_word_length,avg_sentence_length,unique_word_ratio,uppercase_ratio,syllable_ratio,punctuation_count,readabillity]
+    encodings = tokenizer(text,return_tensors="pt")
+    input_ids = encodings["input_ids"]
+    target_ids = input_ids.clone()
+    with torch.no_grad():
+        output = model(input_ids, labels =target_ids)
+        peplexity = torch.exp(output.loss).item()
+    #       0    1      2           3           4           5               6                   7                   8               9               10              11           12           13
+    return [text,label,word_count,char_count,sentence_count,avg_word_length,avg_sentence_length,unique_word_ratio,uppercase_ratio,syllable_ratio,punctuation_count,readabillity,peplexity,compressionRatio]
 def uppercase(text):
     count = 0
     for word in text:
@@ -58,7 +77,7 @@ def WordProcessing(databaseName,processedDatabase):
         writer = csv.writer(file)
         headerForNewFile = ['text', 'label', 'word_count', 'char_count', 'sentence_count', 'avg_word_length',
                             'avg_sentence_length', 'unique_word_ratio', 'uppercase_ratio', 'syllable_ratio',
-                            'punctuation_count', 'readabillity']
+                            'punctuation_count', 'readabillity','perplexity','compressionRatio']
         writer.writerow(headerForNewFile)
     with open(databaseName,'r',encoding='utf-8') as file:
         reader = csv.reader(file)
@@ -74,7 +93,7 @@ def WordProcessing(databaseName,processedDatabase):
                     label = 1
                 writer.writerow(supersplit(text,label))
 
-database=[['paraphrased_data.csv','paraphrased_update.csv'],['dataset.csv','update.csv']]
+database=[['dataset.csv','update.csv'],['paraphrased_data.csv','paraphrased_update.csv']]
 for data in database:
     WordProcessing(data[0],data[1])
 
@@ -90,6 +109,8 @@ with open('update.csv', 'r', encoding='utf-8') as f:
             human.allLength.append(float(row[6]))
             human.allSyllables.append(float(row[9]))
             human.allReadabillity.append(float(row[11]))
+            human.Perplexity.append(float(row[12]))
+            human.CompressionRatio.append(float(row[13]))
             if float(row[11]) > 0:
                 human.posReadabillity += 1
             else:
@@ -98,6 +119,8 @@ with open('update.csv', 'r', encoding='utf-8') as f:
             ai.allLength.append(float(row[6]))
             ai.allSyllables.append(float(row[9]))
             ai.allReadabillity.append(float(row[11]))
+            ai.Perplexity.append(float(row[12]))
+            ai.CompressionRatio.append(float(row[13]))
             if float(row[11]) > 0:
                 ai.posReadabillity += 1
             else:
@@ -114,6 +137,9 @@ with open('update.csv', 'r', encoding='utf-8') as f:
             ['avgSyllables',(sum(human.allSyllables) / len(human.allSyllables)), (sum(ai.allSyllables) / len(ai.allSyllables))])
         writer.writerow(
             ['avgReadabillity',(sum(human.allReadabillity) / len(human.allReadabillity)), (sum(ai.allReadabillity) / len(ai.allReadabillity))])
+        writer.writerow(['avgPerplexity', (sum(human.Perplexity)) /len(human.Perplexity),(sum(ai.Perplexity)) /len(ai.Perplexity)])
+        writer.writerow(['avgCompressionRatio', (sum(human.CompressionRatio)) / len(human.CompressionRatio),
+                         (sum(ai.CompressionRatio)) / len(ai.CompressionRatio)])
         writer.writerow(['posreadCount',human.posReadabillity,ai.posReadabillity])
         writer.writerow(['negreadCount',human.negReadabillity,ai.negReadabillity])
         writer.writerow(['minread',human.minReadabillity,ai.minReadabillity])
